@@ -4,8 +4,9 @@ import { ElevatorContext } from "./Elevator";
 /* eslint-disable react/prop-types */
 const Floor = ({ floorNo }) => {
 	const { elevatorData } = useContext(ElevatorContext);
+
 	return (
-		<div className="relative w-[600px] h-[60px] border-b-[6px] border-amber-600 flex text-xs">
+		<div className="relative w-[600px] h-[60px] border-b-[6px] border-amber-600 flex text-xs shadow-xl">
 			<div className="absolute bottom-3 left-[50%] translate-x-[-50%]">
 				FL-{floorNo}
 			</div>

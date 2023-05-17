@@ -2,7 +2,7 @@ import Floor from "./Floor";
 
 const Floors = () => {
 	return (
-		<div className="flex flex-col-reverse relative z-10 mt-[50px]">
+		<div className="flex flex-col-reverse relative z-10 ">
 			<Floor floorNo={1} />
 			<Floor floorNo={2} />
 			<Floor floorNo={3} />

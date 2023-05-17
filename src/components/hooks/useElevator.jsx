@@ -28,7 +28,7 @@ const useElevator = ({ floors, stopTime = 2, direction, delay }) => {
 			} else if (countdown === 2) {
 				setIsDoorOpen(false);
 			}
-		}, `${delay}000`);
+		}, `${delay}0`);
 	}, [countdown, setStartCountdown, startTimer, stopTime]);
 
 	const handleNextFloor = () => {
@@ -43,13 +43,19 @@ const useElevator = ({ floors, stopTime = 2, direction, delay }) => {
 		if (countdown === 0) {
 			setTimeout(() => {
 				handleNextFloor();
-			}, `${delay}000`);
+			}, `${delay}0`);
 		}
 	}, [countdown, setStartCountdown, requestedFloors]);
 
 	const handleMoveCar = () => {
 		startTimer();
 	};
+
+	// useEffect(() => {
+	// 	if (requestedFloors.length > 0) {
+	// 		handleMoveCar();
+	// 	}
+	// }, [requestedFloors]);
 
 	return {
 		currentFloor,

@@ -38,7 +38,7 @@ const CarColumn = ({ evData }) => {
 
 	return (
 		<>
-			<div className="h-full w-[100px] relative">
+			<div className="h-full w-[100px] relative ">
 				<Car
 					id={evNo}
 					floorNo={floorLevelsHeight[currentFloor - 1]}

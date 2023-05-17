@@ -7,8 +7,22 @@ const useRandomizer = () => {
 
 	const generateRandomNumber = () => {
 		const newRandomNumber = Math.floor(Math.random() * 11);
+
 		setRandomNumber(newRandomNumber);
 		return newRandomNumber;
+	};
+
+	const getNumberAndDecimal = () => {
+		const number = Math.random() * 4;
+		const integerPart = Math.floor(number);
+		const decimalPart = Math.abs(number % 1);
+
+		const firstDecimal = Math.floor(decimalPart * 100);
+
+		return {
+			integerPart,
+			firstDecimal,
+		};
 	};
 
 	const generateRandomGroupOfNumber = () => {
@@ -38,11 +52,12 @@ const useRandomizer = () => {
 
 	return {
 		randomNumber,
+		direction,
 		randoms: randomsRef.current,
 		generateRandomNumber,
 		generateRandomGroupOfNumber,
 		generateDirection,
-		direction,
+		getNumberAndDecimal,
 	};
 };
 
