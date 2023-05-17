@@ -22,11 +22,13 @@ const useElevator = ({ floors, stopTime = 2, direction, delay }) => {
 	useEffect(() => {}, [requestedFloors]);
 
 	useEffect(() => {
-		if (countdown === stopTime - parseInt(stopTime / 5)) {
-			setIsDoorOpen(true);
-		} else if (countdown === 2) {
-			setIsDoorOpen(false);
-		}
+		setTimeout(() => {
+			if (countdown === stopTime - parseInt(stopTime / 5)) {
+				setIsDoorOpen(true);
+			} else if (countdown === 2) {
+				setIsDoorOpen(false);
+			}
+		}, `${delay}000`);
 	}, [countdown, setStartCountdown, startTimer, stopTime]);
 
 	const handleNextFloor = () => {

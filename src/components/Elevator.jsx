@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Floors from "./Floors";
 import CarColumn from "./CarColumn";
 import { createContext, useEffect, useState } from "react";
@@ -7,13 +8,13 @@ import useRandomizer from "./hooks/useRandomizer";
 export const ElevatorContext = createContext();
 
 const Elevator = () => {
-	const { generateRandomGroupOfNumber, generateDirection } = useRandomizer();
+	const {
+		generateRandomGroupOfNumber,
+		generateDirection,
+		generateRandomNumber,
+	} = useRandomizer();
 
 	const [elevatorData, setElevatorData] = useState([]);
-
-	// useEffect(() => {
-	// 	console.log({ randoms });
-	// }, [randoms]);
 
 	useEffect(() => {
 		handleSetData();
@@ -23,6 +24,7 @@ const Elevator = () => {
 		setElevatorData([]);
 		for (let i = 0; i < 4; i++) {
 			const randoms = generateRandomGroupOfNumber();
+			const randomNumber = generateRandomNumber();
 			setElevatorData((prev) => {
 				return [
 					...prev,
@@ -31,16 +33,12 @@ const Elevator = () => {
 						currentFloor: 0,
 						requestedFloors: randoms,
 						direction: generateDirection(),
-						delay: 0,
+						delay: randomNumber,
 					},
 				];
 			});
 		}
 	};
-
-	useEffect(() => {
-		console.log({ elevatorData });
-	}, [elevatorData]);
 
 	return (
 		<ElevatorContext.Provider value={{ elevatorData, setElevatorData }}>
