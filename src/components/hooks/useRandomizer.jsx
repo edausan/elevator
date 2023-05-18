@@ -5,6 +5,7 @@ const useRandomizer = () => {
 	const [direction, setDirection] = useState(0);
 	const randomsRef = useRef([]);
 
+	// generates a random number
 	const generateRandomNumber = () => {
 		const newRandomNumber = Math.floor(Math.random() * 11);
 
@@ -12,6 +13,7 @@ const useRandomizer = () => {
 		return newRandomNumber;
 	};
 
+	// generate a random number and returns an integer and the first decimal
 	const getNumberAndDecimal = () => {
 		const number = Math.random() * 4;
 		const integerPart = Math.floor(number);
@@ -25,6 +27,7 @@ const useRandomizer = () => {
 		};
 	};
 
+	// Generates a group of random numbers
 	const generateRandomGroupOfNumber = () => {
 		for (let i = 0; i < 3; i++) {
 			const ran_num = generateRandomNumber();
@@ -39,6 +42,7 @@ const useRandomizer = () => {
 		return randomsRef.current;
 	};
 
+	// generates random direction
 	const generateDirection = () => {
 		const newRandomNumber = 1 + Math.random();
 		const direction = Math.round(newRandomNumber) === 1 ? "up" : "down";

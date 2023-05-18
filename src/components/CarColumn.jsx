@@ -9,17 +9,13 @@ const CarColumn = ({ evData }) => {
 	const { requestedFloors, evNo, direction, delay } = evData;
 	const { setElevatorData } = useContext(ElevatorContext);
 
-	const stopTime = 5;
-	const { currentFloor, moveCar, isDoorOpen } = useElevator({
+	const stopTime = 10;
+	const { currentFloor, isDoorOpen, moveCountdown } = useElevator({
 		floors: requestedFloors,
 		direction,
 		stopTime,
 		delay,
 	});
-
-	useEffect(() => {
-		moveCar();
-	}, []);
 
 	useEffect(() => {
 		setElevatorData((data) => {
@@ -40,6 +36,7 @@ const CarColumn = ({ evData }) => {
 		<>
 			<div className="h-full w-[100px] relative ">
 				<Car
+					countdown={moveCountdown.countdown}
 					id={evNo}
 					floorNo={floorLevelsHeight[currentFloor - 1]}
 					assignedFloor={currentFloor - 1}
@@ -47,9 +44,6 @@ const CarColumn = ({ evData }) => {
 					isDoorOpen={isDoorOpen}
 					delay
 				/>
-				{/* <button className="absolute bottom-[-30px] left-0" onClick={moveCar}>
-					Start
-				</button> */}
 			</div>
 		</>
 	);

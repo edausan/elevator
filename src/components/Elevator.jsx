@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { createContext, useEffect, useState } from "react";
 import Floors from "./Floors";
 import CarColumn from "./CarColumn";
-import { createContext, useEffect, useState } from "react";
-// import { initialData } from "./data";
 import useRandomizer from "./hooks/useRandomizer";
 
 export const ElevatorContext = createContext();
@@ -46,7 +45,7 @@ const Elevator = () => {
 				<section className="relative bg-amber-50">
 					<div className="flex items-center justify-center">
 						<h2 className="text-4xl text-amber-800 m-6 uppercase font-black">
-							Elevatorator
+							Elevator Simulation
 						</h2>
 					</div>
 
@@ -64,11 +63,6 @@ const Elevator = () => {
 						})}
 					</div>
 				</section>
-				{/* <button
-					onClick={handleSetData}
-					className="px-2 py-1 bg-sky-500 rounded-md m-2 text-white">
-					Set Random Floors
-				</button> */}
 			</section>
 		</ElevatorContext.Provider>
 	);

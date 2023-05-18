@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import useCountdown from "./useCountdown";
@@ -6,10 +7,9 @@ const useElevator = ({ floors, stopTime = 2, direction, delay }) => {
 	const [currentFloor, setCurrentFloor] = useState(1);
 	const [requestedFloors, setRequestedFloors] = useState([]);
 	const [isDoorOpen, setIsDoorOpen] = useState(false);
-	const { countdown, setStartCountdown, startTimer } = useCountdown(
-		stopTime,
-		requestedFloors
-	);
+
+	const moveCountdown = useCountdown(stopTime, requestedFloors);
+	const enterLeaveCountdown = useCountdown(stopTime, requestedFloors);
 
 	useEffect(() => {
 		setRequestedFloors(
@@ -19,17 +19,39 @@ const useElevator = ({ floors, stopTime = 2, direction, delay }) => {
 		);
 	}, [direction, floors]);
 
-	useEffect(() => {}, [requestedFloors]);
+	useEffect(() => {
+		const countdown = enterLeaveCountdown.countdown;
+		if (countdown === stopTime - 1) {
+			setIsDoorOpen(true);
+		} else if (countdown === 2) {
+			setIsDoorOpen(false);
+		}
+
+		if (countdown === 0) {
+			enterLeaveCountdown.stopTimer();
+			moveCountdown.startTimer();
+		}
+	}, [stopTime, enterLeaveCountdown.countdown]);
 
 	useEffect(() => {
-		setTimeout(() => {
-			if (countdown === stopTime - parseInt(stopTime / 5)) {
-				setIsDoorOpen(true);
-			} else if (countdown === 2) {
-				setIsDoorOpen(false);
-			}
-		}, `${delay}0`);
-	}, [countdown, setStartCountdown, startTimer, stopTime]);
+		if (moveCountdown.countdown === 0) {
+			moveCountdown.stopTimer();
+			enterLeaveCountdown.startTimer();
+		}
+	}, [moveCountdown.countdown]);
+
+	useEffect(() => {
+		const countdown = moveCountdown.countdown;
+		if (countdown === stopTime && !isDoorOpen) {
+			handleNextFloor();
+		}
+	}, [requestedFloors, isDoorOpen]);
+
+	useEffect(() => {
+		if (requestedFloors.length > 0) {
+			handleMoveCar();
+		}
+	}, [requestedFloors]);
 
 	const handleNextFloor = () => {
 		const current_floor = requestedFloors[0];
@@ -39,28 +61,15 @@ const useElevator = ({ floors, stopTime = 2, direction, delay }) => {
 		current_floor && setCurrentFloor(current_floor);
 	};
 
-	useEffect(() => {
-		if (countdown === 0) {
-			setTimeout(() => {
-				handleNextFloor();
-			}, `${delay}0`);
-		}
-	}, [countdown, setStartCountdown, requestedFloors]);
-
 	const handleMoveCar = () => {
-		startTimer();
+		moveCountdown.startTimer();
 	};
-
-	// useEffect(() => {
-	// 	if (requestedFloors.length > 0) {
-	// 		handleMoveCar();
-	// 	}
-	// }, [requestedFloors]);
 
 	return {
 		currentFloor,
 		moveCar: handleMoveCar,
 		isDoorOpen,
+		moveCountdown,
 	};
 };
 
