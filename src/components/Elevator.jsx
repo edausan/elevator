@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import Floors from "./Floors";
 import CarColumn from "./CarColumn";
 import useRandomizer from "./hooks/useRandomizer";
+import githubIcon from "../assets/github.svg";
 
 export const ElevatorContext = createContext();
 
@@ -63,6 +64,13 @@ const Elevator = () => {
 						})}
 					</div>
 				</section>
+
+				<a href="https://github.com/edausan/elevator">
+					<div className="group flex flex-row items-center justify-center transition-all p-3 mt-8 gap-2 rounded-md shadow-md hover:shadow-xl">
+						<img src={githubIcon} alt="Github Icon" className="h-[24px]" />
+						github.com/edausan/elevator
+					</div>
+				</a>
 			</section>
 		</ElevatorContext.Provider>
 	);

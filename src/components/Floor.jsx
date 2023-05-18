@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import { ElevatorContext } from "./Elevator";
 
@@ -83,7 +84,7 @@ const ElevatorButtons = ({ evData, ev, floorNo }) => {
 const Button = ({ icon, onClick, disabled, active, selected }) => {
 	return (
 		<button
-			onClick={onClick}
+			// onClick={onClick}
 			disabled={disabled}
 			className={`p-4 text-2xl text-gray-300 hover:text-gray-500 transition-all duration-200 disabled:text-gray-300/25 ${
 				active ? "text-green-500" : ""
