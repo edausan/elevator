@@ -42,7 +42,7 @@ const Elevator = () => {
 	return (
 		<ElevatorContext.Provider value={{ elevatorData, setElevatorData }}>
 			<section className="flex flex-col items-center justify-center">
-				<section className="relative bg-amber-50">
+				<section className="relative">
 					<div className="flex items-center justify-center">
 						<h2 className="text-4xl text-amber-800 m-6 uppercase font-black">
 							Elevator Simulation
